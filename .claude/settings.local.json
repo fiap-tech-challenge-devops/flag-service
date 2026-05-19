@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem *)",
+      "Bash(New-Item -ItemType Directory -Force \"C:\\\\Users\\\\Vitor Prado\\\\Documents\\\\github repos\\\\fiap\\\\fase 2\\\\repo grupo\\\\flag-service\\\\docs\\\\desafios\")",
+      "Bash(Out-Null)",
+      "Bash(Write-Output \"ok\")",
+      "PowerShell(New-Item *)",
+      "Bash(docker compose *)",
+      "Bash(curl *)",
+      "Bash(docker exec togglemaster-flag-service *)"
+    ]
+  }
+}
