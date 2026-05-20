@@ -1,4 +1,4 @@
-# ─── Stage 1: Build ──────────────────────────────────────────────────────────
+#Stage 1: Build  
 FROM python:3.9-alpine AS builder
 
 WORKDIR /app
@@ -6,24 +6,21 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --prefix=/install --no-cache-dir -r requirements.txt
 
-
+#Stage 2: Runtime
 FROM python:3.9-alpine
-
 
 RUN apk --no-cache add wget
 
 
-RUN addgroup -S appgroup && adduser -S -u 10001 appuser -G appgroup
+RUN addgroup -S togglemastergroup && adduser -S -u 10001 togglemaster -G togglemastergroup
 
-WORKDIR /home/appuser
+WORKDIR /home/togglemaster
 
+COPY --from=builder --chown=togglemaster:togglemastergroup /install /usr/local
 
-COPY --from=builder --chown=appuser:appgroup /install /usr/local
+COPY --chown=togglemaster:togglemastergroup app.py .
 
-
-COPY --chown=appuser:appgroup app.py .
-
-USER appuser
+USER togglemaster
 
 EXPOSE 8002
 
