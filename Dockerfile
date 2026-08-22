@@ -1,4 +1,4 @@
-#Stage 1: Build  
+#Stage 1: Build
 FROM python:3.9-alpine AS builder
 
 WORKDIR /app
@@ -9,8 +9,8 @@ RUN pip install --prefix=/install --no-cache-dir -r requirements.txt
 #Stage 2: Runtime
 FROM python:3.9-alpine
 
-RUN apk --no-cache add wget
-
+RUN apk upgrade --no-cache && \
+    apk add --no-cache wget
 
 RUN addgroup -S togglemastergroup && adduser -S -u 10001 togglemaster -G togglemastergroup
 
