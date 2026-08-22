@@ -1,0 +1,28 @@
+name: Flag Service CI
+
+on:
+  workflow_dispatch:
+
+  pull_request:
+    branches:
+      - main
+
+  push:
+    branches:
+      - main
+      - feature/ci-python
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  ci:
+    uses: fiap-tech-challenge-devops/reusable-workflows/.github/workflows/python-ci.yml@feature/ci-python
+
+    with:
+      python-version: "3.9"
+      ecr-repository: "togglemaster/flag-service"
+
+    secrets:
+      AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
