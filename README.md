@@ -53,10 +53,10 @@ Este é o serviço de CRUD (Create, Read, Update, Delete) do projeto ToggleMaste
     ```bash
     curl -X POST http://localhost:8001/admin/keys \
     -H "Content-Type: application/json" \
-    -H "Authorization: Bearer admin-secreto-123" \
+    -H "Authorization: Bearer $MASTER_KEY" \
     -d '{"name": "admin-para-flag-service"}'
     ```
-2.  Copie a chave retornada (ex: `tm_key_...`). Vamos chamá-la de `SUA_CHAVE_API` no resto dos exemplos.
+2.  Copie a chave retornada (ex: `tm_key_...`). Vamos chamá-la de `$SUA_CHAVE_API` no resto dos exemplos.
 
 ---
 
@@ -80,7 +80,7 @@ Saída esperada: `{"error":"Authorization header obrigatório"}`
 ```bash
 curl -X POST http://localhost:8002/flags \
 -H "Content-Type: application/json" \
--H "Authorization: Bearer SUA_CHAVE_API" \
+-H "Authorization: Bearer $SUA_CHAVE_API" \
 -d '{
     "name": "enable-new-dashboard",
     "description": "Ativa o novo dashboard para usuários",
@@ -92,7 +92,7 @@ Saída esperada: (Um JSON com os dados da flag criada).
 **4. Liste todas as Flags:**
 ```bash
 curl http://localhost:8002/flags \
--H "Authorization: Bearer SUA_CHAVE_API"
+-H "Authorization: Bearer $SUA_CHAVE_API"
 ```
 Saída esperada: (Uma lista `[]` contendo a flag que você criou).
 
@@ -100,7 +100,7 @@ Saída esperada: (Uma lista `[]` contendo a flag que você criou).
 ```bash
 curl -X PUT http://localhost:8002/flags/enable-new-dashboard \
 -H "Content-Type: application/json" \
--H "Authorization: Bearer SUA_CHAVE_API" \
+-H "Authorization: Bearer $SUA_CHAVE_API" \
 -d '{"is_enabled": false}'
 ```
 Saída esperada: (O JSON da flag atualizada, com `"is_enabled": false`).
