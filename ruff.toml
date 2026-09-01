@@ -1,0 +1,4 @@
+required-version = ">=0.16,<0.17"
+
+[lint]
+ignore = ["BLE001"]
