@@ -24,7 +24,7 @@ jobs:
     uses: fiap-tech-challenge-devops/reusable-workflows/.github/workflows/python-ci.yml@v2.1.0
 
     with:
-      python-version: "3.9"
+      python-version: "3.13"
       ecr-repository: "togglemaster/flag-service"
       aws-region: "us-east-1"
 
