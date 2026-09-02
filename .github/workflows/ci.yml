@@ -21,7 +21,7 @@ concurrency:
 
 jobs:
   ci:
-    uses: fiap-tech-challenge-devops/reusable-workflows/.github/workflows/python-ci.yml@v2.1.0
+    uses: fiap-tech-challenge-devops/reusable-workflows/.github/workflows/python-ci.yml@v2.2.4
 
     with:
       python-version: "3.13"
