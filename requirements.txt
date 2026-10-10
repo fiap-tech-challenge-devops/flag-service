@@ -3,3 +3,8 @@ psycopg2-binary==2.9.12
 gunicorn==23.0.0
 python-dotenv==1.0.1
 requests==2.32.5
+opentelemetry-distro[otlp]==0.66b1
+opentelemetry-instrumentation-flask==0.66b1
+opentelemetry-instrumentation-requests==0.66b1
+opentelemetry-instrumentation-psycopg2==0.66b1
+opentelemetry-instrumentation-logging==0.66b1
