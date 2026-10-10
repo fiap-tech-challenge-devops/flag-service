@@ -230,6 +230,20 @@ O span `GET` (Client) mostra a chamada saindo para o `auth-service`, mas **não 
 
 **Métricas de negócio.** As métricas de requisição vêm de graça com a instrumentação do Flask. Contadores próprios, como taxa de acerto de cache, exigem código e não entraram aqui.
 
-**`ruff`.** Nenhum import mudou, mas as quatro linhas de cursor ainda não passaram pelo linter local.
-
 **Amostragem.** Está em 100%, que é desvio consciente da recomendação para produção. No volume da demonstração, é o que garante que o trace procurado exista.
+
+---
+
+## Nota de bastidor — o lint que quebrou sozinho
+
+O primeiro PR desta instrumentação reprovou no job `Linter`, e **não era o código**:
+
+```
+ruff failed
+  Cause: Failed to load configuration `ruff.toml`
+  Cause: Required version `>=0.16, <0.17` does not match the running version `0.17.0`
+```
+
+A esteira instalava `ruff` sem fixar versão. Quando a 0.17.0 saiu, o `required-version` passou a recusar a própria ferramenta que a esteira instalava, e o lint morreu ao carregar a configuração — sem analisar uma linha. Qualquer PR nos três serviços Python quebraria igual naquele dia, e a pendência já estava prevista em [`03-lint-ruff.md`](03-lint-ruff.md).
+
+Corrigido pela [v2.2.5](https://github.com/fiap-tech-challenge-devops/reusable-workflows/releases/tag/v2.2.5) do `reusable-workflows`, que fixou `ruff`, `bandit`, `pytest` e `golangci-lint`, mais a ampliação do `required-version` aqui. Com o lint voltando a rodar de verdade: `All checks passed!`.
